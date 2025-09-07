@@ -1,0 +1,72 @@
+# fonts and text
+pdf.fonttype: 42
+ps.fonttype: 42
+svg.fonttype: none
+pdf.use14corefonts: False
+
+# axes behaviour
+axes.xmargin: 0.0
+axes.ymargin: 0.0
+axes.autolimit_mode: round_numbers
+
+# figure and save
+savefig.dpi: 300
+figure.dpi: 100
+figure.facecolor: white
+savefig.facecolor: white
+savefig.transparent: False
+
+# geometry
+path.simplify: False
+agg.path.chunksize: 0
+
+# linewidths and sizes
+lines.linewidth: 0.5
+lines.markersize: 4
+lines.solid_capstyle: round
+lines.dash_capstyle: round
+lines.dash_joinstyle: round
+errorbar.capsize: 0
+patch.linewidth: 0.5
+
+# fonts
+font.size: 7.5
+xtick.labelsize: 6.5
+ytick.labelsize: 6.5
+axes.labelsize: 7.5
+
+# legend
+legend.fontsize: 6
+legend.handlelength: 1
+legend.handletextpad: 0.3
+legend.frameon: False
+legend.labelspacing: 0
+legend.loc: best
+
+# ticks
+xtick.direction: in
+ytick.direction: in
+xtick.top: True
+ytick.right: True
+xtick.major.size: 2
+ytick.major.size: 2
+xtick.minor.size: 1.5
+ytick.minor.size: 1.5
+xtick.major.width: 0.5
+ytick.major.width: 0.5
+xtick.minor.width: 0.3
+ytick.minor.width: 0.3
+xtick.major.pad: 2
+ytick.major.pad: 2
+
+# axes
+axes.labelpad: 2
+axes.axisbelow: True
+axes.linewidth: 0.5
+
+
+figure.constrained_layout.use: True
+figure.constrained_layout.h_pad: 0.01
+figure.constrained_layout.w_pad: 0.001
+figure.constrained_layout.hspace: 0.06
+figure.constrained_layout.wspace: 0.05

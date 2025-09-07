@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pubstyle"
+version = "0.1.0"
+description = "Publication-ready Matplotlib style and helper functions"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = [
+    "matplotlib>=3.6",
+    "numpy>=1.22",
+    "colorspacious>=1.1.2"
+]
+
+[tool.setuptools]
+packages = ["pubstyle"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+pubstyle = ["pubstyle.mplstyle", "MYRIADPRO-BOLD.OTF", "MYRIADPRO-REGULAR.OTF"]
