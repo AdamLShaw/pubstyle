@@ -8,7 +8,7 @@ Enter the parent "pubstyle" folder, and run "pip install ." - alternatively, you
 
 ### Settings
 There are a few main functions, 
-1. "ps.set_publication_style()" - implements the new matplotlib parameters shown in "pubstyle.mplstyle". To revert to the default styling run "ps.reset_style()"
+1. "ps.set_publication_style()" - implements the new matplotlib parameters shown in "pubstyle.mplstyle". This only has to be run once, and will apply to all subsequent figures and does 80% of the styling. To revert to the default styling run "ps.reset_style()"
 2. "ps.format(fig)" - takes as input a figure and applies more custom styling to it (rounding of ticks, styling legends, making markers look nicer, etc). If you look in "core.py" you'll see that "ps.format(fig)" is a wrapper for a bunch of subfunction calls, which you can turn off/do manually as you see fit
 3. "ps.size(str,height)" - when creating axes, it is convenient to make them align exactly with the sizes of various journals. The first argument of "ps.size" is a journal identified (i.e. "nature" or "aps" or "nature2" (for two-column)), which will then autoset the width to the appropriate size. The ssecond argument, height, is in mm.
 
