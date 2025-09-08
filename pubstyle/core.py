@@ -16,18 +16,19 @@ from matplotlib.axes import Axes
 from matplotlib.legend import Legend
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle, Polygon
+from matplotlib.transforms import Bbox
 
 
 def format(fig):
     fig.align_xlabels(fig.axes)
     fig.align_ylabels(fig.axes)
-    round_all_ticks(fig)
     label_subplots(fig)
     pastel_marker_style(fig)
     pastel_hist_style(fig) 
     unclipped_markers(fig)
     style_legend(fig)
-    style_and_shift_colorbars(fig, labelpad=1, labelsize=7.5, tickpad=1.5, ticksize=6.5, shift_frac=0.0)
+    style_and_shift_colorbars(fig)
+    round_all_ticks(fig)
 
 
 def size(journal,height=60):
@@ -205,36 +206,70 @@ def _iter_colorbars(fig):
                 seen.add(id(cb))
                 yield cb
 
-def style_and_shift_colorbars(fig, *, labelpad=10, labelsize=7.5,
-                               tickpad=2, ticksize=7.0, shift_frac=0.5):
+def style_and_shift_colorbars(fig, *, labelpad=1, labelsize=7.5,
+                               tickpad=1.5, ticksize=6.5, shift_frac=0.5,
+                               ticklength=1.1):
+    
     """
     Style colorbars and optionally shift right-side ones closer to their parent.
 
     shift_frac = 0.5 means reduce the gap (pad) between parent and cbar by half.
     """
+    fig.set_constrained_layout(False)
+
+    fig.canvas.draw()  # freeze current positions
+
     for cb in _iter_colorbars(fig):
-        # --- style ---
+        # style
         lbl = cb.ax.get_ylabel()
         if lbl:
             cb.set_label(lbl, labelpad=labelpad, fontsize=labelsize)
-        cb.ax.tick_params(pad=tickpad, labelsize=ticksize)
+        cb.ax.tick_params(pad=tickpad, labelsize=ticksize, length=ticklength)
 
-        # --- position adjustment ---
-        parent = cb.mappable.axes
-        pos_p = parent.get_position().frozen()
-        pos_c = cb.ax.get_position().frozen()
+        cb.minorticks_off()
+        cb.ax.set_axisbelow(False)
 
-        # allow manual positioning under constrained_layout
-        if getattr(fig, "get_constrained_layout", lambda: False)():
-            cb.ax.set_in_layout(False)
+        # detach from layout
+        cb.ax.set_in_layout(False)
 
-        # detect right-side vertical cbar
-        if abs(pos_c.y0 - pos_p.y0) < 1e-3 and abs(pos_c.y1 - pos_p.y1) < 1e-3:
-            if pos_c.x0 > pos_p.x1:  # to the right
-                gap = pos_c.x0 - pos_p.x1
-                new_gap = gap * shift_frac
-                new_x0 = pos_p.x1 + new_gap
-                cb.ax.set_position([new_x0, pos_c.y0, pos_c.width, pos_c.height])
+        # positions
+        p = cb.mappable.axes.get_position()
+        c = cb.ax.get_position()
+
+
+        def shift_bbox(c, p, side):
+            if side == "right":
+                gap = c.x0 - p.x1
+                new_x0 = p.x1 + gap * shift_frac
+                return Bbox.from_bounds(new_x0, c.y0, c.width, c.height)
+            elif side == "left":
+                gap = p.x0 - c.x1
+                new_x1 = p.x0 - gap * shift_frac
+                return Bbox.from_bounds(new_x1 - c.width, c.y0, c.width, c.height)
+            elif side == "above":
+                gap = c.y0 - p.y1
+                new_y0 = p.y1 + gap * shift_frac
+                return Bbox.from_bounds(c.x0, new_y0, c.width, c.height)
+            elif side == "below":
+                gap = p.y0 - c.y1
+                new_y1 = p.y0 - gap * shift_frac
+                return Bbox.from_bounds(c.x0, new_y1 - c.height, c.width, c.height)
+            else:
+                return c  # unchanged
+
+        if c.height >= c.width and c.x0 >= p.x1 - 1e-6:
+            side = "right"
+        elif c.height >= c.width and c.x1 <= p.x0 + 1e-6:
+            side = "left"
+        elif c.width > c.height and c.y0 >= p.y1 - 1e-6:
+            side = "above"
+        elif c.width > c.height and c.y1 <= p.y0 + 1e-6:
+            side = "below"
+        else:
+            side = None
+
+        cb.ax.set_position(shift_bbox(c, p, side))
+
 
 def classify_axes(fig):
     """
@@ -316,6 +351,9 @@ def label_subplots(fig, offset=0, pad_pt=(0, 0), upper=False,
     # compute top row from the kept axes only
     top_y = max(ax.get_tightbbox(r).y1 for ax in axes) if axes else 0
 
+    if len(axes)==1:
+        return
+    
     # place labels
     for i, ax in enumerate(axes):
         bbox = ax.get_tightbbox(r)
