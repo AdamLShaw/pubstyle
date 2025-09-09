@@ -16,7 +16,7 @@ There are a few main functions,
 It is standard to ```import pubstyle as ps```, then run ```ps.set_publication_style()``` once in order to set all the various plotting defaults. Then run ```ps.format(fig)``` after the figure is created (right before you do plt.show() or save the figure).
 
 ### Known problems
-I have not tested all possible plot types, so it's always possible something comes up that causes problems. I have endeavored to make it support multiple subplots, but there will always be places where spacings are a little bit weird. You should assume if you are arranging multiple disparate subplots that you will likely want to arrange in Illustrator (or equivalent after).
+I have not tested all possible plot types, so it's always possible something comes up that causes problems. I have endeavored to make it support multiple subplots, but there will always be places where spacings are a little bit weird. You should assume if you are arranging multiple disparate subplots that you will likely want to arrange in Illustrator (or equivalent) after.
 
 ## Examples
 In all plots I apply ```set_publication_style()``` and ```format(fig)```. See pubstyle/example.py
