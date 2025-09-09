@@ -2,7 +2,7 @@
 Matplotlib settings and wrapper functions for close to publication quality figures. Tries to replicate my preferred style of use Adobe Illustrator to beautify figures, and gets 90% of the way there.
 
 ## Installation
-Enter the parent "pubstyle" folder, and run ```pip install .``` - alternatively, you can just copy the functions you care about out of the "core.py" but this will miss some stylistic things. Import like ```import pubstyle as ps```
+Enter the repo root directory, and run ```pip install .``` - alternatively, you can just copy the functions you care about out of the "core.py" but this will miss some stylistic things. Import like ```import pubstyle as ps```
 
 ## Use
 
