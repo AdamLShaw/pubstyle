@@ -19,7 +19,9 @@ It is standard to "import pubstyle as ps", then run "ps.set_publication_style()"
 I have not tested all possible plot types, so it's always possible something comes up that causes problems. I have endeavored to make it support multiple subplots, but there will always be places where spacings are a little bit weird. You should assume if you are arranging multiple disparate subplots that you will likely want to arrange in Illustrator (or equivalent after).
 
 ## Examples
-In all plots I apply "set_publication_style()" and "format(fig)". I do not set any font sizes etc, and let either the standard default settings, or the pubstyle settings take care of everything. (obviously the "before' could be made to look less nice by changing font sizes etc, but that's the point of pubstyle, to take care of all that for standard journal formatting.)
+In all plots I apply "set_publication_style()" and "format(fig)". See pubstyle/example.py
+
+I do not set any font sizes etc, and let either the standard default settings, or the pubstyle settings take care of everything. (obviously the "before' could be made to look less nice by changing font sizes etc, but that's the point of pubstyle, to take care of all that for standard journal formatting.)
 
 | Before | After |
 |--------|-------|

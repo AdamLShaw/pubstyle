@@ -69,3 +69,4 @@ dmypy.json
 # IDE settings
 .vscode/
 .idea/
+.DS_Store
