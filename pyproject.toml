@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 dependencies = [
-    "matplotlib>=3.6",
+    "matplotlib>=3.9",
     "numpy>=1.22",
     "colorspacious>=1.1.2"
 ]
