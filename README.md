@@ -1,5 +1,5 @@
 # pubstyle
-Matplotlib settings and wrapper functions for close to publication quality figures. Tries to replicate my preferred style of using Adobe Illustrator to beautify figures, and gets 90% of the way there.
+Matplotlib settings and wrapper functions for close to publication quality figures. Tries to replicate my preferred style of using Adobe Illustrator to beautify figures, and gets 90% of the way there. Sets all font sizes, line widths, tick styles etc to publication quality.
 
 ## Installation
 Enter the repo root directory, and run ```pip install .``` (it is recommended to do so in a fresh conda environment if errors occur) - alternatively, you can just copy the functions you care about out of the "core.py" but this will miss some stylistic things. Import like ```import pubstyle as ps```
