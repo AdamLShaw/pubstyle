@@ -21,7 +21,7 @@ I have not tested all possible plot types, so it's always possible something com
 ## Examples
 In all plots I apply ```set_publication_style()``` and ```format(fig)```. See pubstyle/example.py
 
-I do not set any font sizes etc, and let either the standard default settings, or the pubstyle settings take care of everything. (obviously the "before' could be made to look less nice by changing font sizes etc, but that's the point of pubstyle, to take care of all that for standard journal formatting.)
+I do not set any font sizes etc, and let either the standard default settings, or the pubstyle settings take care of everything. (obviously the "before' could be made to look more nice by changing font sizes etc, but that's the point of pubstyle, to take care of all that for standard journal formatting.)
 
 | Before | After |
 |--------|-------|
